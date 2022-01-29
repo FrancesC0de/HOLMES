@@ -1,0 +1,723 @@
+{
+   "sorrel":[
+      "tail",
+      "legs",
+      "fur",
+      "hooves",
+      "feet",
+      "head"
+   ],
+   "zebra":[
+      "tail",
+      "legs",
+      "fur",
+      "hooves",
+      "feet",
+      "head"
+   ],
+   "hog":[
+      "tail",
+      "legs",
+      "feet",
+      "hooves",
+      "curly tail",
+      "fur",
+      "udder",
+      "head"
+   ],
+   "ox":[
+      "tail",
+      "legs",
+      "feet",
+      "hooves",
+      "fur",
+      "dewlap",
+      "head"
+   ],
+   "water buffalo":[
+      "hump",
+      "tail",
+      "legs",
+      "fur",
+      "hooves",
+      "feet",
+      "head"
+   ],
+   "bison":[
+      "hump",
+      "tail",
+      "legs",
+      "fur",
+      "hooves",
+      "feet",
+      "head"
+   ],
+   "ram":[
+      "legs",
+      "feet",
+      "fur",
+      "hooves",
+      "head"
+   ],
+   "ibex":[
+      "tail",
+      "legs",
+      "feet",
+      "fur",
+      "hooves",
+      "head"
+   ],
+   "Arabian camel":[
+      "long neck",
+      "tail",
+      "legs",
+      "hooves",
+      "feet",
+      "fur",
+      "hump",
+      "head"
+   ],
+   "tabby":[
+      "head",
+      "tail",
+      "legs",
+      "fur",
+      "feet"
+   ],
+   "tiger cat":[
+      "head",
+      "tail",
+      "legs",
+      "fur",
+      "feet"
+   ],
+   "Persian cat":[
+      "head",
+      "tail",
+      "legs",
+      "fur",
+      "feet"
+   ],
+   "Siamese cat":[
+      "head",
+      "tail",
+      "legs",
+      "fur",
+      "feet"
+   ],
+   "Egyptian cat":[
+      "head",
+      "tail",
+      "legs",
+      "fur",
+      "feet"
+   ],
+   "cougar":[
+      "head",
+      "tail",
+      "legs",
+      "feet",
+      "fur"
+   ],
+   "lynx":[
+      "head",
+      "tail",
+      "legs",
+      "fur",
+      "feet"
+   ],
+   "leopard":[
+      "tail",
+      "legs",
+      "feet",
+      "head",
+      "fur"
+   ],
+   "snow leopard":[
+      "head",
+      "tail",
+      "legs",
+      "fur",
+      "feet"
+   ],
+   "jaguar":[
+      "head",
+      "tail",
+      "legs",
+      "feet",
+      "fur"
+   ],
+   "lion":[
+      "head",
+      "tail",
+      "legs",
+      "feet",
+      "fur"
+   ],
+   "tiger":[
+      "head",
+      "tail",
+      "legs",
+      "feet",
+      "fur",
+      "ruff"
+   ],
+   "cheetah":[
+      "head",
+      "tail",
+      "legs",
+      "fur",
+      "feet"
+   ],
+   "loggerhead":[
+      "scales",
+      "shell",
+      "tail",
+      "head",
+      "flippers"
+   ],
+   "leatherback turtle":[
+      "scales",
+      "shell",
+      "tail",
+      "head",
+      "flippers"
+   ],
+   "mud turtle":[
+      "scales",
+      "shell",
+      "tail",
+      "head",
+      "flippers"
+   ],
+   "terrapin":[
+      "scales",
+      "shell",
+      "tail",
+      "head",
+      "flippers"
+   ],
+   "box turtle":[
+      "scales",
+      "shell",
+      "tail",
+      "head",
+      "flippers"
+   ],
+   "common iguana":[
+      "scales",
+      "legs",
+      "feet",
+      "head",
+      "dewlap",
+      "tail"
+   ],
+   "American alligator":[
+      "legs",
+      "feet",
+      "head",
+      "tail",
+      "scales"
+   ],
+   "rock python":[
+      "scales",
+      "head"
+   ],
+   "diamondback":[
+      "scales",
+      "tail",
+      "head"
+   ],
+   "sidewinder":[
+      "scales",
+      "tail",
+      "head"
+   ],
+   "dishwasher":[
+      "racks",
+      "push-buttons",
+      "knob",
+      "door"
+   ],
+   "Dutch oven":[
+      "knob",
+      "racks",
+      "door"
+   ],
+   "microwave":[
+      "push-buttons",
+      "monitor",
+      "door"
+   ],
+   "rotisserie":[
+      "knob",
+      "racks",
+      "door"
+   ],
+   "stove":[
+      "knob",
+      "door",
+      "oven",
+      "racks",
+      "hob on top"
+   ],
+   "toaster":[
+      "push-buttons",
+      "knob",
+      "slots",
+      "lever"
+   ],
+   "broom":[
+      "handle",
+      "bristles"
+   ],
+   "hammer":[
+      "head",
+      "handle"
+   ],
+   "hatchet":[
+      "handle",
+      "head"
+   ],
+   "power drill":[
+      "trigger",
+      "handle",
+      "threads",
+      "enclosure"
+   ],
+   "screw":[
+      "flat head",
+      "threads"
+   ],
+   "screwdriver":[
+      "handle",
+      "shaft",
+      "contoured head"
+   ],
+   "shovel":[
+      "handle",
+      "shaft",
+      "blade"
+   ],
+   "airliner":[
+      "nose",
+      "windows",
+      "wheels",
+      "turbines",
+      "door",
+      "wings",
+      "fins",
+      "propeller",
+      "tail"
+   ],
+   "ambulance":[
+      "coachwork",
+      "bumper",
+      "siren",
+      "windows",
+      "cargo space",
+      "wheels",
+      "door",
+      "number plate",
+      "mirror",
+      "bonnet",
+      "light",
+      "roof"
+   ],
+   "barrow":[
+      "handle",
+      "draw bar",
+      "wheels",
+      "container"
+   ],
+   "beach wagon":[
+      "wheels",
+      "steering wheel",
+      "windows",
+      "mirror",
+      "light",
+      "number plate",
+      "bonnet",
+      "trunk",
+      "roof",
+      "bumper",
+      "door",
+      "belts"
+   ],
+   "bicycle-built-for-two":[
+      "step-through frame",
+      "fork",
+      "wheels",
+      "chain",
+      "gears",
+      "handlebar",
+      "brakes",
+      "seat",
+      "pedals"
+   ],
+   "cab":[
+      "coachwork",
+      "bumper",
+      "wheels",
+      "door",
+      "windows",
+      "roof",
+      "bonnet",
+      "light",
+      "trunk",
+      "mirror",
+      "number plate"
+   ],
+   "convertible":[
+      "wheels",
+      "steering wheel",
+      "windows",
+      "mirror",
+      "light",
+      "number plate",
+      "bonnet",
+      "trunk",
+      "roof",
+      "bumper",
+      "door",
+      "belts"
+   ],
+   "fire engine":[
+      "coachwork",
+      "windows",
+      "wheels",
+      "bumper",
+      "mirror",
+      "number plate",
+      "bonnet",
+      "light",
+      "cabin",
+      "trailer",
+      "container",
+      "door",
+      "roof"
+   ],
+   "freight car":[
+      "wheels",
+      "steering wheel",
+      "windows",
+      "mirror",
+      "light",
+      "number plate",
+      "bonnet",
+      "trunk",
+      "roof",
+      "bumper",
+      "door",
+      "belts"
+   ],
+   "garbage truck":[
+      "coachwork",
+      "windows",
+      "wheels",
+      "bumper",
+      "mirror",
+      "number plate",
+      "bonnet",
+      "light",
+      "cabin",
+      "trailer",
+      "container",
+      "door",
+      "roof"
+   ],
+   "horse cart":[
+      "frame",
+      "wheels",
+      "container",
+      "handlebar"
+   ],
+   "jeep":[
+      "coachwork",
+      "wheels",
+      "steering wheel",
+      "windows",
+      "roof",
+      "light",
+      "mirror",
+      "number plate",
+      "trunk",
+      "bonnet",
+      "spare tire",
+      "bumper",
+      "door"
+   ],
+   "jinrikisha":[
+      "frame",
+      "wheels",
+      "container",
+      "handlebar"
+   ],
+   "limousine":[
+      "number plate",
+      "coachwork",
+      "bumper",
+      "windows",
+      "door",
+      "wheels",
+      "bonnet",
+      "light",
+      "roof",
+      "trunk",
+      "mirror"
+   ],
+   "minibus":[
+      "coachwork",
+      "bumper",
+      "windows",
+      "wheels",
+      "mirror",
+      "light",
+      "door",
+      "roof",
+      "number plate"
+   ],
+   "minivan":[
+      "wheels",
+      "steering wheel",
+      "windows",
+      "mirror",
+      "light",
+      "number plate",
+      "bonnet",
+      "trunk",
+      "roof",
+      "bumper",
+      "door",
+      "belts"
+   ],
+   "mobile home":[
+      "windows",
+      "roof",
+      "wheels",
+      "draw bar",
+      "door"
+   ],
+   "Model T":[
+      "wheels",
+      "steering wheel",
+      "windows",
+      "mirror",
+      "light",
+      "number plate",
+      "bonnet",
+      "trunk",
+      "roof",
+      "bumper",
+      "door",
+      "belts"
+   ],
+   "moped":[
+      "frame",
+      "seat",
+      "wheels",
+      "light",
+      "exhaust pipe",
+      "stand",
+      "mudguard",
+      "handlebar",
+      "tank",
+      "windshield",
+      "mirror"
+   ],
+   "motor scooter":[
+      "step-through frame",
+      "seat",
+      "wheels",
+      "mirror",
+      "brakes",
+      "light",
+      "exhaust pipe",
+      "stand",
+      "mudguard",
+      "handlebar",
+      "floorboard"
+   ],
+   "mountain bike":[
+      "step-through frame",
+      "fork",
+      "wheels",
+      "chain",
+      "gears",
+      "handlebar",
+      "brakes",
+      "seat",
+      "pedals"
+   ],
+   "moving van":[
+      "coachwork",
+      "windows",
+      "roof",
+      "wheels",
+      "bonnet",
+      "light",
+      "mirror",
+      "number plate",
+      "bumper",
+      "cargo space",
+      "door"
+   ],
+   "oxcart":[
+      "frame",
+      "wheels",
+      "container",
+      "handlebar"
+   ],
+   "passenger car":[
+      "wheels",
+      "steering wheel",
+      "windows",
+      "mirror",
+      "light",
+      "number plate",
+      "bonnet",
+      "trunk",
+      "roof",
+      "bumper",
+      "door",
+      "belts"
+   ],
+   "pickup":[
+      "coachwork",
+      "windows",
+      "wheels",
+      "bumper",
+      "mirror",
+      "number plate",
+      "bonnet",
+      "light",
+      "cabin",
+      "trailer",
+      "container",
+      "door",
+      "roof"
+   ],
+   "police van":[
+      "wheels",
+      "steering wheel",
+      "windows",
+      "mirror",
+      "light",
+      "number plate",
+      "bonnet",
+      "trunk",
+      "roof",
+      "bumper",
+      "door",
+      "belts"
+   ],
+   "racer":[
+      "wheels",
+      "steering wheel",
+      "windows",
+      "mirror",
+      "light",
+      "number plate",
+      "bonnet",
+      "trunk",
+      "roof",
+      "bumper",
+      "door",
+      "belts"
+   ],
+   "school bus":[
+      "coachwork",
+      "bumper",
+      "windows",
+      "wheels",
+      "mirror",
+      "light",
+      "door",
+      "roof",
+      "number plate"
+   ],
+   "shopping cart":[
+      "frame",
+      "wheels",
+      "container",
+      "handlebar"
+   ],
+   "sports car":[
+      "wheels",
+      "steering wheel",
+      "windows",
+      "mirror",
+      "light",
+      "number plate",
+      "bonnet",
+      "trunk",
+      "roof",
+      "bumper",
+      "door",
+      "belts"
+   ],
+   "streetcar":[
+      "handlebar",
+      "wheels",
+      "platform"
+   ],
+   "tow truck":[
+      "coachwork",
+      "windows",
+      "wheels",
+      "bumper",
+      "mirror",
+      "number plate",
+      "bonnet",
+      "light",
+      "cabin",
+      "trailer",
+      "container",
+      "door",
+      "roof"
+   ],
+   "tractor":[
+      "coachwork",
+      "bumper",
+      "wheels",
+      "steering wheel",
+      "light",
+      "bonnet",
+      "brakes",
+      "loader",
+      "seat"
+   ],
+   "trailer truck":[
+      "coachwork",
+      "windows",
+      "wheels",
+      "bumper",
+      "mirror",
+      "number plate",
+      "bonnet",
+      "light",
+      "cabin",
+      "trailer",
+      "container",
+      "door",
+      "roof"
+   ],
+   "trolleybus":[
+      "coachwork",
+      "bumper",
+      "windows",
+      "wheels",
+      "mirror",
+      "light",
+      "door",
+      "roof",
+      "number plate"
+   ],
+   "unicycle":[
+      "seat",
+      "wheel",
+      "frame",
+      "fork",
+      "pedals"
+   ]
+}
