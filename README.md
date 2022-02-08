@@ -1,6 +1,6 @@
 # HOLMES: HOLonym-MEronym based Semantic inspection
 
-![](images/Overview.png?raw=true)
+![](images/OverviewNew.png?raw=true)
 
 ## Introduction
 This repository contains the code for running the experiments of HOLMES: HOLonym-MEronym based Semantic inspection. <br />
