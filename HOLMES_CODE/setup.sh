@@ -28,3 +28,4 @@ python -m pip install repackage==0.7.3
 python -m pip install xmltodict==0.12.0
 python -m pip install nltk==3.6.2
 python -m pip install setuptools==41.2.0
+python -m pip install timm==0.6.11
