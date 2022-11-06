@@ -6,7 +6,7 @@ import torchvision
 from torchvision import models
 import torch.nn.functional as F
 from netlib.mobilenet import mobilenet 
-from netlib.transformers import get_transformer_model, transformer_ft
+from netlib.transformers import get_transformer_model, deit_ft
 
 """**VGG16 with activations hooks for Grad-CAM**"""
 
@@ -391,7 +391,7 @@ def load_best_model(model_name, NUM_CLASSES, save_file_name, freeze=True):
   elif model_name == 'inception':
     model = inception_ft(NUM_CLASSES, freeze=freeze)
   elif model_name == 'deit':
-    model = transformer_ft(NUM_CLASSES, freeze=freeze)
+    model = deit_ft(NUM_CLASSES, freeze=freeze)
   else:
     raise Exception('Model {} not supported.'.format(model_name))
   model.classifier.load_state_dict(checkpoint['model_state_dict'])
@@ -443,7 +443,7 @@ def get_model_by_name(model_name, hooks=False):
     elif model_name == 'inception':
       model = get_inception_model() if hooks == False else inception_ft(None, edit=False).cuda().eval()
     elif model_name == 'deit':
-      model = get_transformer_model() if hooks == False else transformer_ft(None, edit=False).cuda().eval()
+      model = get_transformer_model() if hooks == False else deit_ft(None, edit=False).cuda().eval()
     else:
       raise Exception('Model {} not supported.'.format(model_name))
       

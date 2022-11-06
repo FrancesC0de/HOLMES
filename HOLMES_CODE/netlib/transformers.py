@@ -40,7 +40,7 @@ class Transformer(nn.Module):
         # inherit attributes and objects
         self.num_classes = self.deit.num_classes
         self.global_pool = self.deit.global_pool
-        self.num_features = self.deit.embed_dim
+        self.num_features = self.embed_dim = self.deit.embed_dim
         self.num_prefix_tokens = self.deit.num_prefix_tokens
         self.no_embed_class = self.deit.no_embed_class
         self.patch_embed = self.deit.patch_embed
@@ -65,7 +65,7 @@ class Transformer(nn.Module):
         # get the classifier head of the transformer
         self.norm = self.deit.norm
         self.fc_norm = self.deit.fc_norm
-        self.head = self.deit.head
+        self.classifier = self.deit.head
         
         # placeholder for the gradients
         self.gradients = None
@@ -73,12 +73,6 @@ class Transformer(nn.Module):
     # hook for the gradients of the activations
     def activations_hook(self, grad):
         self.gradients = grad
-
-    def classifier(self, x):
-        if self.global_pool:
-            x = x[:, self.num_prefix_tokens:].mean(dim=1) if self.global_pool == 'avg' else x[:, 0]
-        x = self.fc_norm(x)
-        return self.head(x)
 
     def forward(self, x, hook=False):
         x = self.patch_embed(x)
@@ -94,6 +88,10 @@ class Transformer(nn.Module):
 
         x = self.features2(x, x_n)
         x = self.norm(x)
+
+        if self.global_pool:
+            x = x[:, self.num_prefix_tokens:].mean(dim=1) if self.global_pool == 'avg' else x[:, 0]
+        x = self.fc_norm(x)
         x = self.classifier(x)
 
         return x
@@ -109,7 +107,7 @@ class Transformer(nn.Module):
 
 """**Transformer Meronyms Model**"""
 
-def tranformer_ft(NUM_CLASSES, edit=True, freeze=True):
+def deit_ft(NUM_CLASSES, edit=True, freeze=True):
     model = Transformer()
     if edit == False:
       return model
@@ -118,7 +116,7 @@ def tranformer_ft(NUM_CLASSES, edit=True, freeze=True):
       for param in model.parameters():
           param.requires_grad = False
     # substitute the classifier head (unfrozen weights)
-    model.head = nn.Linear(model.embed_dim, NUM_CLASSES) 
+    model.classifier = nn.Linear(model.embed_dim, NUM_CLASSES) 
 
     return model
 
@@ -139,7 +137,7 @@ def main():
     batch_size = 8
     inp = torch.rand(batch_size, 3, 224, 224).cuda()
     model_orig = get_transformer_model()
-    model_custom = tranformer_ft(1000, edit=False).eval().cuda()
+    model_custom = deit_ft(1000, edit=False).eval().cuda()
 
     with torch.no_grad():
         out_orig = model_orig(inp).cpu().detach().numpy()

@@ -48,6 +48,8 @@ def train_parts(model_name, num_classes, idx_to_class, checkpoint, trainloader, 
     model = mobilenet_ft(num_classes).cuda()
   elif model_name == 'inception':
     model = inception_ft(num_classes).cuda()
+  elif model_name == 'deit':
+    model = deit_ft(num_classes).cuda()
   else:
     raise Exception('Model {} not supported.'.format(model_name))
   start = time.time()
@@ -166,6 +168,7 @@ if __name__ == '__main__':
   
   from trainlib.trainlib import get_loaders, train, evaluate_all
   from netlib.netlib import vgg16_ft, resnet50_ft, densenet121_ft, mobilenet_ft, inception_ft
+  from netlib.transformers import deit_ft
   
   if CONFIG == 'Scraping':
     config_file = 'class_config.json'
