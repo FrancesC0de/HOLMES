@@ -40,7 +40,7 @@ class Transformer(nn.Module):
         # inherit attributes and objects
         self.num_classes = self.deit.num_classes
         self.global_pool = self.deit.global_pool
-        self.num_features = self.embed_dim = self.deit.embed_dim
+        self.cunits = self.num_features = self.embed_dim = self.deit.embed_dim
         self.num_prefix_tokens = self.deit.num_prefix_tokens
         self.no_embed_class = self.deit.no_embed_class
         self.patch_embed = self.deit.patch_embed
@@ -102,7 +102,12 @@ class Transformer(nn.Module):
     
     # method for the activation extraction
     def get_activations(self, x):
-        return reshape_transform(self.features(x))
+        x = self.patch_embed(x)
+        x = self._pos_embed(x)
+        x = self.norm_pre(x)
+        x = self.features(x)
+        x = self.target_layer(x)
+        return reshape_transform(x)
 
 
 """**Transformer Meronyms Model**"""
