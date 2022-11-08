@@ -4,7 +4,6 @@
 
 ## Introduction
 This repository contains the code for running the experiments of HOLMES: HOLonym-MEronym based Semantic inspection. <br />
-The entire repository, including the experimental code, can be downloaded from this *anonymous* [link](https://zenodo.org/record/4902937#.YLspEvkzZPY).
 
 This code includes:
 
@@ -49,7 +48,6 @@ This code includes:
     sudo python unix_additional_setup.py install
 ```
 
-* Download this repository archive from this *anonymous* [link](https://zenodo.org/record/4902937#.YLspEvkzZPY) and extract it.
 * Download the ILSVRC 2012 ImageNet validation set (50,000 validation images) from [here](https://image-net.org/challenges/LSVRC/2012/index.php#) and put the downloaded archive (ILSVRC2012_img_val.tar) into the `Holonyms` folder.
 * Execute the script `extract_and_rename.py` from the `Holonyms` folder.
 
