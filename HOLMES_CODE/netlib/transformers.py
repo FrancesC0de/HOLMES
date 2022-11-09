@@ -25,17 +25,30 @@ class BlockWrapper(nn.Module):
         return x
 
 
+MODEL_ZOO = {
+    "deit-tiny": {
+        "repo" : "facebookresearch/deit:main",
+        "model": "deit_tiny_patch16_224"
+    },
+    "deit-base": {
+        "repo" : "facebookresearch/deit:main",
+        "model": "deit_base_patch16_224"
+    }
+}
+
+
 """**Tranformer with activations hooks for Grad-CAM**"""
 
 # https://github.com/rwightman/pytorch-image-models/blob/main/timm/models/vision_transformer.py
 class Transformer(nn.Module):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, model_name="deit-base", *args, **kwargs):
         super(Transformer, self).__init__()
         self.name = 'deit'
         
         # get the pretrained Transformer network
-        self.deit = torch.hub.load('facebookresearch/deit:main',
-                            'deit_tiny_patch16_224', pretrained=True)
+        model_dict = MODEL_ZOO.get(model_name)
+        self.deit = torch.hub.load(model_dict["repo"],
+                            model_dict["model"], pretrained=True)
 
         # inherit attributes and objects
         self.num_classes = self.deit.num_classes
@@ -112,7 +125,7 @@ class Transformer(nn.Module):
 
 """**Transformer Meronyms Model**"""
 
-def deit_ft(NUM_CLASSES, edit=True, freeze=True):
+def deit_ft(NUM_CLASSES, edit=True, freeze=True, deep_classifier=False):
     model = Transformer()
     if edit == False:
       return model
@@ -121,16 +134,26 @@ def deit_ft(NUM_CLASSES, edit=True, freeze=True):
       for param in model.parameters():
           param.requires_grad = False
     # substitute the classifier head (unfrozen weights)
-    model.classifier = nn.Linear(model.embed_dim, NUM_CLASSES) 
+    if not deep_classifier:
+        model.classifier = nn.Linear(model.embed_dim, NUM_CLASSES) 
+    else:
+        hidden_size = model.embed_dim // 2
+        model.classifier = nn.Sequential(
+            nn.Linear(model.embed_dim, hidden_size),
+            nn.ReLU(True),
+            nn.Dropout(),
+            nn.Linear(hidden_size, NUM_CLASSES),
+        )
 
     return model
 
 
 """**Load the original model**"""
 
-def get_transformer_model():
-  vit_model = torch.hub.load('facebookresearch/deit:main',
-                            'deit_tiny_patch16_224', pretrained=True).cuda()
+def get_transformer_model(model_name="deit-base"):
+  model_dict = MODEL_ZOO.get(model_name)
+  vit_model = torch.hub.load(model_dict["repo"],
+                    model_dict["model"], pretrained=True).cuda()
   vit_model.name = 'deit'
   vit_model.eval()
 

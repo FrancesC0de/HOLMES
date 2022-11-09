@@ -57,9 +57,9 @@ def train_parts(model_name, num_classes, idx_to_class, checkpoint, trainloader, 
   end = time.time()
   training_time = (end - start)
   # test the model on the test set and save the final per class calibrated f1-score in the checkpoint
-  f1s = evaluate_all(testloader, model, num_classes, idx_to_class, training_time=training_time, save_file_name=checkpoint)
+  f1s, test_acc = evaluate_all(testloader, model, num_classes, idx_to_class, training_time=training_time, save_file_name=checkpoint)
 
-  return training_time, f1s
+  return training_time, f1s, test_acc
   
 """**Run Training Step**"""
 
@@ -86,17 +86,18 @@ def run_training_only(CONFIG, HOL_MER_DICT, S_ROOT, FILTER_PREFIX, CKP_PATH, MOD
       # do training only if not already previously done (no checkpoint or no f1-scores calculated)
       if os.path.exists(CHECKPOINT) == False or 'f1score_c' not in torch.load(CHECKPOINT):
         # training
-        training_time, f1s = train_parts(MODEL, NUM_CLASSES, IDX_TO_CLASS, CHECKPOINT, trainloader, validloader, testloader, 
+        training_time, f1s, test_acc = train_parts(MODEL, NUM_CLASSES, IDX_TO_CLASS, CHECKPOINT, trainloader, validloader, testloader, 
                                             n_epochs=N_EPOCHS, lr=LR, patience=PATIENCE)
       # checkpoint and scores exist but have not been serialized                                     
       else:
         ckp = torch.load(CHECKPOINT)
         training_time = ckp['training_time']
         f1s = ckp['f1score_c'] 
-      train_dict[HOLONYM] = {'parts': MERONYMS, 'training_time': training_time, 'f1_scores': f1s}
+        test_acc = ckp['test_accuracy']
+      train_dict[HOLONYM] = {'parts': MERONYMS, 'training_time': training_time, 'f1_scores': f1s, 'test_acc': test_acc}
       # serialization
       with open(train_json, 'w') as fp:
-        json.dump(train_dict, fp)
+        json.dump(train_dict, fp, indent=4)
         
 """**Main**"""
 

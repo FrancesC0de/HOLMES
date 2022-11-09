@@ -367,4 +367,4 @@ def evaluate_all(test_loader, model, n_classes, IDX_TO_CLASS, training_time = No
             'training_time': training_time,
             }, save_file_name)
 
-  return f1score_c
+  return f1score_c, test_acc

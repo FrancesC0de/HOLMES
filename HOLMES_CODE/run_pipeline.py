@@ -93,7 +93,7 @@ def train_parts(num_classes, idx_to_class, checkpoint, trainloader, validloader,
   end = time.time()
   training_time = (end - start)
   # test the model on the test set and save the final per class calibrated f1-score in the checkpoint
-  f1s = evaluate_all(testloader, model, num_classes, idx_to_class, training_time=training_time, save_file_name=checkpoint)
+  f1s, _ = evaluate_all(testloader, model, num_classes, idx_to_class, training_time=training_time, save_file_name=checkpoint)
 
   return training_time, f1s
   
