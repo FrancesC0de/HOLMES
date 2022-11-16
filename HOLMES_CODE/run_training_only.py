@@ -50,6 +50,8 @@ def train_parts(model_name, num_classes, idx_to_class, checkpoint, trainloader, 
     model = inception_ft(num_classes).cuda()
   elif model_name == 'deit':
     model = deit_ft(num_classes).cuda()
+  elif model_name == 'swin':
+    model = swin(num_classes).cuda()
   else:
     raise Exception('Model {} not supported.'.format(model_name))
   start = time.time()
