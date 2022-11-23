@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import numpy as np
 import timm
-
+from itertools import chain
 
 # https://github.com/jacobgil/pytorch-grad-cam/blob/master/usage_examples/vit_example.py
 def reshape_transform(tensor, height=14, width=14):
@@ -330,6 +330,8 @@ def swin(NUM_CLASSES, edit=True, freeze=True):
         # freeze model weights
         for param in model.parameters():
             param.requires_grad = False
+        for param in chain(model.features3.parameters(), model.target_layer.parameters()):
+            param.requires_grad = True
     # substitute the classifier head (unfrozen weights)
     model.classifier = nn.Linear(model.num_features, NUM_CLASSES)
 
