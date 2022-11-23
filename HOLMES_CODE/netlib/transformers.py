@@ -39,14 +39,19 @@ class SwinBlockWrapper(nn.Module):
         super().__init__()
         self.block = block
 
-    def forward(self, x, x_norm1):
+    def forward(self, x, x_norm1=None):
         H, W = self.block.input_resolution
         B, L, C = x.shape
         if not L == H * W:
             sys.exit(-156)
 
         shortcut = x
-        x = x_norm1
+        if x_norm1 is None: # get output up to x_norm2 (excluded)
+            n2 = True
+            x = self.block.norm1(x)
+        else: # get full output
+            n2 = False
+            x = x_norm1
         x = x.view(B, H, W, C)
 
         # cyclic shift
@@ -75,7 +80,19 @@ class SwinBlockWrapper(nn.Module):
 
         # FFN
         x = shortcut + self.block.drop_path(x)
+        if n2: return x
         x = x + self.block.drop_path(self.block.mlp(self.block.norm2(x)))
+        return x
+
+
+class SwinBlockMLPDrop(nn.Module):
+    def __init__(self, block):
+        super().__init__()
+        self.drop_path = block.drop_path
+        self.mlp = block.mlp
+
+    def forward(self, x, x_norm2):
+        x = x + self.drop_path(self.mlp(x_norm2))
         return x
 
 
@@ -235,6 +252,7 @@ class Swin(nn.Module):
     def __init__(self, *args, **kwargs):
         super(Swin, self).__init__()
         self.name = 'swin'
+        self.target = "f3_n1"
 
         # get the pretrained Transformer network
         self.swin = timm.create_model('swin_small_patch4_window7_224', pretrained=True)
@@ -261,11 +279,19 @@ class Swin(nn.Module):
         # N.B: we can choose any layer before the final attention block
         # the gradient will be zero afterwards
         # last eligible layer is at index o (norm1) of last block (-1)swin
-        self.target_layer = self.swin.layers[-1].blocks[-1].norm1
 
-        # add the remainig blocks
-        #self.features2 = SwinBlockWrapper(self.swin.layers[-1].blocks[-1])
-        self.features3 = SwinBlockWrapper(self.swin.layers[-1].blocks[-1])
+        if self.target == "f3_n1":
+            self.target_layer = self.swin.layers[-1].blocks[-1].norm1
+            self.features3 = SwinBlockWrapper(self.swin.layers[-1].blocks[-1])
+        elif self.target == "f2_n1":
+            self.target_layer = self.swin.layers[-1].blocks[-2].norm1
+            self.features2 = SwinBlockWrapper(self.swin.layers[-1].blocks[-2])
+            self.features3 = self.swin.layers[-1].blocks[-1]
+        elif self.target == "f2_n2":
+            self.features2 = SwinBlockWrapper(self.swin.layers[-1].blocks[-2])
+            self.target_layer = self.swin.layers[-1].blocks[-2].norm2
+            self.features2_bis = SwinBlockMLPDrop(self.swin.layers[-1].blocks[-2])
+            self.features3 = self.swin.layers[-1].blocks[-1]
 
         # get the classifier head of the transformer
         self.norm = self.swin.norm
@@ -284,17 +310,26 @@ class Swin(nn.Module):
         if self.pos_embed is not None:
             x = x + self.pos_embed
         x = self.pos_drop(x)
+        x = self.features(x)
         #x = self._pos_embed(x)
         #x = self.norm_pre(x)
-        x = self.features2(self.features(x))
-        x_n = self.target_layer(x)
+        if self.target == "f3_n1":
+            x = self.features2(x)
+            x_n = self.target_layer(x)
+            if hook == True: h = x_n.register_hook(self.activations_hook)
+            x = self.features3(x, x_n)
+        elif self.target == "f2_n1":
+            x_n = self.target_layer(x)
+            if hook == True: h = x_n.register_hook(self.activations_hook)
+            x = self.features2(x, x_n)
+            x = self.features3(x)
+        elif self.target == "f2_n2":
+            x = self.features2(x)
+            x_n2 = self.target_layer(x)
+            if hook == True: h = x_n2.register_hook(self.activations_hook)
+            x = self.features2_bis(x, x_n2)
+            x = self.features3(x)
 
-        if hook == True:
-            # register the hook
-            # the hook will be called every time a gradient with respect to the tensor is computed
-            h = x_n.register_hook(self.activations_hook)
-
-        x = self.features3(x, x_n)
         x = self.norm(x)
 
         if self.global_pool == 'avg':
@@ -314,8 +349,15 @@ class Swin(nn.Module):
         if self.pos_embed is not None:
             x = x + self.pos_embed
         x = self.pos_drop(x)
-        x = self.features2(self.features(x))
-        x = self.target_layer(x)
+        x = self.features(x)
+        if self.target == "f3_n1":
+            x = self.features2(x)
+            x = self.target_layer(x)
+        elif self.target == "f2_n1":
+            x = self.target_layer(x)
+        elif self.target == "f2_n2":
+            x = self.features2(x)
+            x = self.target_layer(x)
         return swin_reshape_transform(x)
 
 
@@ -360,8 +402,8 @@ def main():
     # check that the custom transformer model is equivalent to the original model
     batch_size = 8
     inp = torch.rand(batch_size, 3, 224, 224).cuda()
-    model_orig = get_transformer_model()
-    model_custom = deit_ft(1000, edit=False).eval().cuda()
+    model_orig = get_swin_model() #get_transformer_model()
+    model_custom = swin(1000, edit=False).eval().cuda() #deit_ft(1000, edit=False).eval().cuda()
 
     with torch.no_grad():
         out_orig = model_orig(inp).cpu().detach().numpy()
