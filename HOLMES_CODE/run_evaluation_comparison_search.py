@@ -118,6 +118,7 @@ def run_evaluation_comparison(CONFIG, HOL_MER_DICT, CKP_PATH, TEST_IMGS_PATH, MO
   curves_dict = {}
   # load data if already existing
   res_dir = "Results/grid_search"
+  os.makedirs(res_dir, exist_ok=True)
   curves_json = os.path.join(res_dir, CONFIG + '_' + MODEL + '_' + PMODE + '_' + str(P) + '_curves.json')
   if os.path.exists(curves_json) == True:
     with open(curves_json) as json_file: 
