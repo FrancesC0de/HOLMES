@@ -1,10 +1,12 @@
 # HOLMES: HOLonym-MEronym based Semantic inspection
 
+### Official pytorch implementation of the paper: "HOLMES: HOLonym-MEronym based Semantic inspection"
+#### Paper accepted at [xAI 2023](https://xaiworldconference.com/)
+
 ![](images/OverviewNew.png?raw=true)
 
 ## Introduction
 This repository contains the code for running the experiments of HOLMES: HOLonym-MEronym based Semantic inspection. <br />
-The entire repository, including the experimental code, can be downloaded from this *anonymous* [link](https://zenodo.org/record/4902937#.YLspEvkzZPY).
 
 This code includes:
 
