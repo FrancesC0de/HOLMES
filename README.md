@@ -1,6 +1,6 @@
-# HOLMES: HOLonym-MEronym based Semantic inspection
+# HOLMES: HOLonym-MEronym based Semantic inspection for Convolutional Image Classifiers
 
-### Official pytorch implementation of the paper: "HOLMES: HOLonym-MEronym based Semantic inspection"
+### Official pytorch implementation of the paper: "HOLMES: HOLonym-MEronym based Semantic inspection for Convolutional Image Classifiers"
 #### Paper accepted at [xAI 2023](https://xaiworldconference.com/)
 
 ![](images/OverviewNew.png?raw=true)
